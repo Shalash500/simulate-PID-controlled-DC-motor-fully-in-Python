@@ -29,40 +29,40 @@ def run_closed_loop(setpoint_rpm, Kp, Ki, Kd):
         current_log.append(x[0])
         t += DT
 
+    return np.array(time_log), np.array(omega_log), np.array(voltage_log), np.array(error_log), np.array(current_log)
+
+if __name__ == "__main__":
+    t, omega, voltage, error, current = run_closed_loop(
+        setpoint_rpm=SETPOINT_RPM,
+        Kp=0.04, Ki=0.2, Kd=0.0
+    )
+
     plt.figure(figsize=(12, 8))
 
     plt.subplot(2, 2, 1)
-    plt.plot(time_log, omega_log)
-    plt.axhline(setpoint_rpm, linestyle="--")
+    plt.plot(t, omega)
+    plt.axhline(SETPOINT_RPM, linestyle="--")
     plt.title("Speed Response")
     plt.xlabel("Time (s)")
     plt.ylabel("RPM")
 
     plt.subplot(2, 2, 2)
-    plt.plot(time_log, voltage_log)
+    plt.plot(t, voltage)
     plt.title("Control Voltage")
     plt.xlabel("Time (s)")
     plt.ylabel("Voltage (V)")
 
     plt.subplot(2, 2, 3)
-    plt.plot(time_log, error_log)
+    plt.plot(t, error)
     plt.title("Error")
     plt.xlabel("Time (s)")
     plt.ylabel("Error (RPM)")
 
     plt.subplot(2, 2, 4)
-    plt.plot(time_log, current_log)
+    plt.plot(t, current)
     plt.title("Control Current")
     plt.xlabel("Time (s)")
     plt.ylabel("Current (A)")
 
     plt.tight_layout()
     plt.show()
-
-    return np.array(time_log), np.array(omega_log), np.array(voltage_log), np.array(error_log), np.array(current_log)
-
-if __name__ == "__main__":
-    run_closed_loop(
-        setpoint_rpm=SETPOINT_RPM,
-        Kp=0.04, Ki=0.2, Kd=0.0
-    )
