@@ -34,9 +34,9 @@ ax.set_ylabel("Speed (RPM)")
 ax.grid(True)
 ax.legend()
 
-ax_kp = plt.axes([0.15, 0.20, 0.70, 0.03])
-ax_ki = plt.axes([0.15, 0.13, 0.70, 0.03])
-ax_kd = plt.axes([0.15, 0.06, 0.70, 0.03])
+ax_kp = plt.axes((0.15, 0.20, 0.70, 0.03))
+ax_ki = plt.axes((0.15, 0.13, 0.70, 0.03))
+ax_kd = plt.axes((0.15, 0.06, 0.70, 0.03))
 
 slider_kp = Slider(
     ax=ax_kp,
